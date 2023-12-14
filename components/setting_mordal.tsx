@@ -5,6 +5,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import SelectMidiDevice from "./selectMidiInput";
 import SelectColor from './selectColor';
 import { UserSettingContext } from '@/contexts/userSettingsProvider';
+import ToggleAlpha from './toggleAlpha';
 
 export default function SettingModal() {
   let [isOpen, setIsOpen] = useState(false)
@@ -116,6 +117,7 @@ export default function SettingModal() {
                     >
                       Change colors!
                     </Dialog.Title>
+                    <ToggleAlpha />
                     <SelectColor />
                   </div>
 
@@ -129,7 +131,7 @@ export default function SettingModal() {
                     </Dialog.Title>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
                       onClick={resetCameraOnModal}
                     >
                       Reset Camera
@@ -146,7 +148,7 @@ export default function SettingModal() {
 
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
                       onClick={hideButton}
                     >
                       Hide Settings Button

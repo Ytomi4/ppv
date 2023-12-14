@@ -7,7 +7,8 @@ import { ColName2RectangleColor } from '@/utils/colorNameParser';
 export default function Rectangles({space = 0.015, width = 0.01, height = 0.05, velocities  = new Array(88).fill(0), ...props}){
     const meshRef = useRef<THREE.InstancedMesh | null>(null);
     const geometry = new THREE.BufferGeometry();
-    let material = new THREE.MeshBasicMaterial();
+
+    
 
     const userSettings = useContext(UserSettingContext);
   
@@ -16,6 +17,9 @@ export default function Rectangles({space = 0.015, width = 0.01, height = 0.05, 
     }
   
     const [colorName, setColorName] = useState("");
+
+    const colCodeRef = useRef(parseInt("FFFFE0", 16));
+    let material = new THREE.MeshBasicMaterial({color: colCodeRef.current});
   
     useEffect(() => {
       if (userSettings) {
@@ -24,9 +28,8 @@ export default function Rectangles({space = 0.015, width = 0.01, height = 0.05, 
     }, [userSettings]);
 
     useEffect(() => {
-        const colCode = "0x".concat(ColName2RectangleColor(colorName));
-        console.log(colCode);
-        material.color.set(parseInt(colCode, 16));
+        colCodeRef.current = parseInt("0x".concat(ColName2RectangleColor(colorName)));
+        material.color.set(colCodeRef.current);
     },[colorName])
 
     let obj = new THREE.Object3D();

@@ -12,22 +12,26 @@ const ColorNameComponent = () => {
   }
 
   const [colorName, setColorName] = useState("");
+  const [transparency, setTransparency] = useState<boolean>(false);
 
   useEffect(() => {
     if (userSettings) {
       setColorName(userSettings.colorName.toString());
+      setTransparency(userSettings.transparency);
     }
   }, [userSettings]);
 
   useEffect(() => {
     let root = document.documentElement;
 
-    if (colorName) {
+    if (transparency) {
+      root.style.setProperty('--background-start-rgb', `transparency`);
+    } else if (colorName) {
       let id = ColorName2ThemeColorId(colorName);
       root.style.setProperty('--background-start-rgb', `var(--background-option${id}-start-rgb)`);
       root.style.setProperty('--background-end-rgb', `var(--background-option${id}-end-rgb)`);
     }
-  }, [colorName]);
+  }, [colorName, transparency]);
 
   return (
     <div></div>

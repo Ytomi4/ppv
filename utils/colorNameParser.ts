@@ -27,7 +27,7 @@ export function ColName2RectangleColor(colName: String){
         case 7:
             return "FFFFFF";
         case 1:
-            return "FFFFE0";
+            return "FFC0CB";
         case 2:
             return "FFA07A";
         case 3:
