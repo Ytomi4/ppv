@@ -3,20 +3,38 @@
 @tailwind utilities;
 
 :root {
+  /* Default Colors */
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: var(--background-option2-start-rgb);
+  --background-end-rgb: var(--background-option2-end-rgb);
+
+  --background-option6-start-rgb: 214, 219, 220;
+  --background-option6-end-rgb: 200, 200, 200;
+
+  --background-option7-start-rgb: 0, 0, 0;
+  --background-option7-end-rgb: 0, 0, 0;
+
+  /* Option 1: Soft Blue Gradient */
+  --background-option1-start-rgb: 225, 245, 254; /* Light Blue */
+  --background-option1-end-rgb: 179, 229, 252; /* Sky Blue */
+
+  /* Option 2: Gentle Green Gradient */
+  --background-option2-start-rgb: 232, 245, 233; /* Mint Cream */
+  --background-option2-end-rgb: 200, 230, 201; /* Magic Mint */
+
+  /* Option 3: Warm Orange Gradient */
+  --background-option3-start-rgb: 255, 243, 224; /* Papaya Whip */
+  --background-option3-end-rgb: 255, 204, 128; /* Light Salmon */
+
+  /* Option 4: Cool Purple Gradient */
+  --background-option4-start-rgb: 243, 229, 245; /* Lavender Blush */
+  --background-option4-end-rgb: 206, 147, 216; /* Light Pastel Purple */
+
+  /* Option 5: Earthy Brown Gradient */
+  --background-option5-start-rgb: 255, 248, 220; /* Cornsilk */
+  --background-option5-end-rgb: 205, 133, 63; /* Peru */
 }
 
-/*
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-*/
 
 body {
   color: rgb(var(--foreground-rgb));

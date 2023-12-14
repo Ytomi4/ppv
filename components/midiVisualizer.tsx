@@ -1,12 +1,16 @@
 'use client'
 
-import { Suspense, useEffect, useState, useRef } from 'react';
+import { Suspense, useEffect, useState, useRef, useContext } from 'react';
 import { MidiMessage, parseMIDIMessageData } from '../utils/manageMidiInput';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 import Rectangles from './rectangles';
+import { Vector3 } from 'three';
+import { UserSettingContext } from '@/contexts/userSettingsProvider';
 
 export default function MidiVisualizer() {
     const [velocities, setVelocities] = useState<number[]>(new Array(88).fill(0));
+
 
     useEffect(() => {
         const midiAccess = navigator.requestMIDIAccess();
@@ -38,7 +42,7 @@ export default function MidiVisualizer() {
     }, []);
 
     return (
-      <Canvas shadows dpr={[1, 2]} camera={{ position: [-1, 1.5, 2], fov: 25 }}>
+      <Canvas shadows dpr={[1, 2]} camera={{ position: new Vector3(-1, 1.5, 2), fov: 25 }}>
         <spotLight position={[-4, 8, -4]} angle={0.1} penumbra={1} castShadow shadow-mapSize={[2048, 2048]} />
         <Suspense fallback={<div>Loading...</div>}>
             <Rectangles velocities={velocities} />
@@ -47,6 +51,7 @@ export default function MidiVisualizer() {
             <planeGeometry args={[5, 5]} />
             <shadowMaterial transparent opacity={0.15} />
         </mesh>
+        <OrbitControls />
       </Canvas>
     );
 }

@@ -5,7 +5,7 @@ import * as THREE from 'three';
 export default function Rectangles({space = 0.015, width = 0.01, height = 0.05, velocities  = new Array(88).fill(0), ...props}){
     const meshRef = useRef<THREE.InstancedMesh | null>(null);
     const geometry = new THREE.BufferGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const material = new THREE.MeshBasicMaterial({ color: 0xFFA07A});
 
     let obj = new THREE.Object3D();
     const intensitiesRef = useRef(new Array(88).fill(0)); 
@@ -30,7 +30,7 @@ export default function Rectangles({space = 0.015, width = 0.01, height = 0.05, 
 
     return (
         <instancedMesh castShadow ref={meshRef} args={[geometry, material, 88]}>
-            <planeGeometry args={[width, height]} />
+            <boxGeometry args={[width, height, 0.001]} />
         </instancedMesh>
     )
 }

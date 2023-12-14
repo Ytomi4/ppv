@@ -1,13 +1,15 @@
 
-import SelectMidiInput from '../components/selectMidiInput';
+import { UserSettingProvider } from '@/contexts/userSettingsProvider';
 import MidiVisualizer from '@/components/midiVisualizer';
+import SettingModal from '@/components/setting_mordal';
 
 export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center h-screen">
-      <h1>Available Device:</h1>
-      <SelectMidiInput />
-      <MidiVisualizer />
+      <UserSettingProvider>
+        <SettingModal />
+        <MidiVisualizer />
+      </UserSettingProvider>
     </div>
   )
 }
