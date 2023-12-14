@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState, useEffect, useContext } from 'react'
 import { IoSettingsOutline } from "react-icons/io5";
 import SelectMidiInput from "./selectMidiInput";
+import SelectColor from './selectColor';
 import { UserSettingContext } from '@/contexts/userSettingsProvider';
 
 export default function SettingModal() {
@@ -108,13 +109,14 @@ export default function SettingModal() {
                     <SelectMidiInput />
                   </div>
                   
-                  <div className="mt-4">
+                  <div className="mt-4 flex flex-col items-center">
                     <Dialog.Title
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900"
                     >
                       Change colors!
                     </Dialog.Title>
+                    <SelectColor />
                   </div>
 
 
