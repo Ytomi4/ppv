@@ -2,7 +2,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState, useEffect, useContext } from 'react'
 import { IoSettingsOutline } from "react-icons/io5";
-import SelectMidiInput from "./selectMidiInput";
+import SelectMidiDevice from "./selectMidiInput";
 import SelectColor from './selectColor';
 import { UserSettingContext } from '@/contexts/userSettingsProvider';
 
@@ -106,7 +106,7 @@ export default function SettingModal() {
                     >
                       You need a MIDI keyboard!
                     </Dialog.Title>
-                    <SelectMidiInput />
+                    <SelectMidiDevice />
                   </div>
                   
                   <div className="mt-4 flex flex-col items-center">
