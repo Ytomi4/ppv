@@ -17,7 +17,8 @@ export default function MidiVisualizer() {
         inputs.forEach(input => {
           input.onmidimessage = (message) => {
             const data: number[] = Array.from(message.data);
-            setMidiInputMessages(prevMessages => [...prevMessages, parseMIDIMessageData(data)]);
+            setMidiInputMessages([parseMIDIMessageData(data)]);
+            //setMidiInputMessages(prevMessages => [...prevMessages, parseMIDIMessageData(data)]);
           };
         });
   
@@ -31,7 +32,6 @@ export default function MidiVisualizer() {
 
     return (
       <div>
-        
         {midiInputMessages.length > 0 ? midiInputMessages.map((message) => (
           <div>
               <div>--------------------</div>
