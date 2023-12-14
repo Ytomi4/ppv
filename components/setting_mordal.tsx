@@ -92,7 +92,7 @@ export default function SettingModal() {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Let's enjoy playing the piano!
+                    Let&apos;s enjoy playing the piano!
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">

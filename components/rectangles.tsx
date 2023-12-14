@@ -30,7 +30,7 @@ export default function Rectangles({space = 0.015, width = 0.01, height = 0.05, 
     useEffect(() => {
         colCodeRef.current = parseInt("0x".concat(ColName2RectangleColor(colorName)));
         material.color.set(colCodeRef.current);
-    },[colorName])
+    },[colorName, material.color])
 
     let obj = new THREE.Object3D();
     const intensitiesRef = useRef(new Array(88).fill(0)); 

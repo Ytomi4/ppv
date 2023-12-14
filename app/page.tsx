@@ -10,7 +10,7 @@ export default function Home() {
     <div className="flex flex-col justify-center items-center h-screen">
       <Head>
         <title>PianoPlayVisualizer</title>
-        <link ref="icon" href="/public/ppv_favicon.ico"></link>
+        <link rel="icon" href="/public/ppv_favicon.ico"></link>
       </Head>
       <UserSettingProvider>
         <SettingModal />

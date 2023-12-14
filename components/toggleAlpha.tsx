@@ -14,7 +14,7 @@ export default function ToggleAlpha() {
     if (setTransparency) {
       setTransparency(enabled);
     }
-  },[enabled])
+  },[enabled, setTransparency])
 
   return (
     <div className="flex flex-row items-center py-1">
