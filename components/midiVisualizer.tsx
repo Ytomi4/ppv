@@ -1,7 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { MidiMessage, parseMIDIMessageData } from '../utils/manageMidiInput';
+import { Canvas } from '@react-three/fiber';
+import Rectangles from './rectangles';
 
 export default function MidiVisualizer() {
     const [midiInputMessages, setMidiInputMessages] = useState<MidiMessage[]>([]);
@@ -31,16 +33,16 @@ export default function MidiVisualizer() {
     }, []);
 
     return (
-      <div>
-        {midiInputMessages.length > 0 ? midiInputMessages.map((message) => (
-          <div>
-              <div>--------------------</div>
-              <p>Note: {message.note}</p>
-              <p>Note On: {message.noteOn ? 'True' : 'False'}</p>
-              <p>Velocity: {message.velocity}</p>
-              <div>--------------------</div>
-          </div>
-        )) : <p>No message</p>}
-      </div>
+      <Canvas shadows dpr={[1, 2]} camera={{ position: [-1, 1.5, 2], fov: 25 }}>
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <Suspense fallback={<div>Loading...</div>}>
+            <Rectangles space={0.02} />
+        </Suspense>
+        <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.025, 0]}>
+            <planeGeometry />
+            <shadowMaterial transparent opacity={0.15} />
+        </mesh>
+      </Canvas>
     );
 }

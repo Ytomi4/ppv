@@ -7,7 +7,6 @@ export default function Home() {
     <div className="flex flex-col justify-center items-center h-screen">
       <h1>Available Device:</h1>
       <SelectMidiInput />
-      <h1>MIDI Message</h1>
       <MidiVisualizer />
     </div>
   )
