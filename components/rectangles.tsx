@@ -19,7 +19,7 @@ export default function Rectangles({space = 0.015, width = 0.01, height = 0.05, 
 
             obj.position.x = (i - 44) * space;
             obj.position.y = (deltaY / 2) * height;
-            obj.scale.y = deltaY;
+            //obj.scale.y = deltaY;
             obj.updateMatrix();
             if (meshRef.current) {
                 meshRef.current.setMatrixAt(i, obj.matrix);
@@ -29,9 +29,8 @@ export default function Rectangles({space = 0.015, width = 0.01, height = 0.05, 
     })
 
     return (
-        <instancedMesh ref={meshRef} args={[geometry, material, 88]}>
+        <instancedMesh castShadow ref={meshRef} args={[geometry, material, 88]}>
             <planeGeometry args={[width, height]} />
-            <meshPhongMaterial color={0xffffff} /> 
         </instancedMesh>
     )
 }

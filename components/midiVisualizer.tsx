@@ -16,7 +16,6 @@ export default function MidiVisualizer() {
                 input.onmidimessage = (message) => {
                     const data: number[] = Array.from(message.data);
                     const midiMessage = parseMIDIMessageData(data);
-                    console.log(midiMessage);
 
                     setVelocities(prevVelocities => {
                         const newVelocities = [...prevVelocities];
@@ -40,13 +39,12 @@ export default function MidiVisualizer() {
 
     return (
       <Canvas shadows dpr={[1, 2]} camera={{ position: [-1, 1.5, 2], fov: 25 }}>
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
+        <spotLight position={[-4, 8, -4]} angle={0.1} penumbra={1} castShadow shadow-mapSize={[2048, 2048]} />
         <Suspense fallback={<div>Loading...</div>}>
             <Rectangles velocities={velocities} />
         </Suspense>
-        <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.025, 0]}>
-            <planeGeometry />
+        <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+            <planeGeometry args={[5, 5]} />
             <shadowMaterial transparent opacity={0.15} />
         </mesh>
       </Canvas>
