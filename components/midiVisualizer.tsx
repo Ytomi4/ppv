@@ -6,24 +6,7 @@ import { Canvas } from '@react-three/fiber';
 import Rectangles from './rectangles';
 
 export default function MidiVisualizer() {
-    const [midiInputMessages, setMidiInputMessages] = useState<MidiMessage[]>([]);
-    const [noteIntensities, setNoteIntensities] = useState<number[]>(new Array(88).fill(0));
-    const decayRate = 0.1;
-    const lastUpdateTime = useRef(Date.now());
-
-    useEffect(() => {
-        console.log('messages', midiInputMessages, 'length', midiInputMessages.length);
-    }, [midiInputMessages]);
-
-    useEffect(() => {
-        const now = Date.now();
-        const elapsed = (now - lastUpdateTime.current) / 1000; // convert ms to s
-        lastUpdateTime.current = now;
-
-        setNoteIntensities(prevIntensities =>
-            prevIntensities.map(intensity => Math.max(0, intensity - decayRate * elapsed))
-        );
-    }, []);
+    const [velocities, setVelocities] = useState<number[]>(new Array(88).fill(0));
 
     useEffect(() => {
         const midiAccess = navigator.requestMIDIAccess();
@@ -33,17 +16,16 @@ export default function MidiVisualizer() {
                 input.onmidimessage = (message) => {
                     const data: number[] = Array.from(message.data);
                     const midiMessage = parseMIDIMessageData(data);
+                    console.log(midiMessage);
 
-                    setMidiInputMessages(prevMessages => [...prevMessages, midiMessage]);
-
-                    setNoteIntensities(prevIntensities => {
-                        const newIntensities = [...prevIntensities];
+                    setVelocities(prevVelocities => {
+                        const newVelocities = [...prevVelocities];
                         if (midiMessage.noteOn) {
-                            newIntensities[midiMessage.note - 21] = midiMessage.velocity;
+                            newVelocities[midiMessage.note - 21] = midiMessage.velocity;
                         } else {
-                            newIntensities[midiMessage.note - 21] = 0;
+                            newVelocities[midiMessage.note - 21] = -50;
                         }
-                        return newIntensities;
+                        return newVelocities;
                     });
                 };
             });
@@ -61,7 +43,7 @@ export default function MidiVisualizer() {
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
         <Suspense fallback={<div>Loading...</div>}>
-            <Rectangles space={0.02} intensities={noteIntensities} />
+            <Rectangles velocities={velocities} />
         </Suspense>
         <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.025, 0]}>
             <planeGeometry />
