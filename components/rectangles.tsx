@@ -1,11 +1,33 @@
 import { useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
+import { useRef, useContext, useEffect, useState } from 'react'
 import * as THREE from 'three';
+import { UserSettingContext } from '@/contexts/userSettingsProvider';
+import { ColName2RectangleColor } from '@/utils/colorNameParser';
 
 export default function Rectangles({space = 0.015, width = 0.01, height = 0.05, velocities  = new Array(88).fill(0), ...props}){
     const meshRef = useRef<THREE.InstancedMesh | null>(null);
     const geometry = new THREE.BufferGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0xFFA07A});
+    let material = new THREE.MeshBasicMaterial();
+
+    const userSettings = useContext(UserSettingContext);
+  
+    if (!userSettings) {
+      throw new Error("UserSettingContext is undefined. Make sure the context provider is set up correctly.");
+    }
+  
+    const [colorName, setColorName] = useState("");
+  
+    useEffect(() => {
+      if (userSettings) {
+        setColorName(userSettings.colorName.toString());
+      }
+    }, [userSettings]);
+
+    useEffect(() => {
+        const colCode = "0x".concat(ColName2RectangleColor(colorName));
+        console.log(colCode);
+        material.color.set(parseInt(colCode, 16));
+    },[colorName])
 
     let obj = new THREE.Object3D();
     const intensitiesRef = useRef(new Array(88).fill(0)); 

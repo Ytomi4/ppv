@@ -1,12 +1,13 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { UserSettingContext } from '@/contexts/userSettingsProvider'
 
 const people = [
-  { name: 'White' },
-  { name: 'Black' },
-  { name: 'Soft Blue' },
   { name: 'Gentle Green' },
+  { name: 'White' },
+  //{ name: 'Black' },
+  { name: 'Soft Blue' },
   { name: 'Warm Orange' },
   { name: 'Cool Purple' },
   { name: 'Earthy Brown' }
@@ -14,6 +15,15 @@ const people = [
 
 export default function SelectColor() {
   const [selected, setSelected] = useState(people[0])
+
+  const userSettingContext = useContext(UserSettingContext);
+  const updateColorName = userSettingContext?.updateColorName;
+
+  useEffect(() => {
+    if (updateColorName) {
+      updateColorName(selected.name);
+    }
+  }, [selected, updateColorName])
 
   return (
     <div className="w-72">
